@@ -1,0 +1,678 @@
+/* styles.css */
+*{
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #007bff; /* Sky Blue */
+  color: #fff;
+  padding: 0px 20px;
+}
+
+.navbar-logo {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.navbar-logo span {
+  font-weight: 600;
+  color: #000000;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+  gap: 20px;
+  border-bottom: 1px solid white;
+  margin: 0 20px;
+}
+
+.search-container i{
+  font-size: 16px;
+}
+
+.search-container input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px 0;
+}
+
+.search-container input::placeholder{
+  color: rgb(236, 236, 236);
+  font-family: 'Poppins',sans-serif;
+}
+
+.search-container button {
+  padding: 10px;
+  border: 1px solid #dfdfdf;
+  border-radius: 0 5px 5px 0;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.search-container input{
+  font-family: 'Poppins',sans-serif;
+  color: #ffffff;
+}
+
+.search-container button i {
+  color: #ffffff;
+}
+
+.search-container button:hover {
+  background-color: #e0e0e0;
+}
+
+.navbar-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  margin-right: 20px;
+}
+
+.icon{
+  font-size: 18px;
+  /* margin: 0 5px; */
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.icon:hover{
+  color: #000000; 
+}
+
+.datetime {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-size: 14px;
+  color: #fff;
+}
+
+.logout-btn {
+  height: 40px;
+  width: 80px;
+  border-radius: 5px;
+  background-color: rgb(0, 0, 0);
+  border: none;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #ff3535;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.track-btn {
+  height: 40px;
+  width: 80px;
+  border-radius: 5px;
+  background-color: #007bff;
+  border: none;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.track-btn:hover {
+  background-color: #007bff;
+  color: #000000;
+  font-weight: 600;
+}
+
+.container {
+  display: flex;
+}
+
+.sidenavigation {
+  background: #f2f2f2;
+}
+
+.section.active h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.sidebar {
+  width: 250px;
+  padding: 20px;
+  height: 100vh; /* Full height of the viewport */
+  min-height: 100%; /* Ensures expansion as more content is added */
+  background-color: #f4f4f4; /* Optional background color */
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  overflow-y: auto;  /* Allows scrolling if content exceeds the viewport height */
+}
+
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+.sidebar li.active {
+  background-color: #007bff; /* Sky Blue */
+  color: #fff;
+  border-radius: 5px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px; 
+  background-color: #fff;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+.user-data-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Display 2 cards per row */
+  gap: 20px; /* Add space between the cards */
+}
+
+.card {
+  position: relative; /* Needed for positioning the circles */
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  overflow: hidden; /* Ensures circles won't overflow outside the card */
+}
+
+/* Circle Design */
+.circle-design {
+  position: absolute;
+  top: -40px;
+  right: 30px;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.5; /* Make it semi-transparent */
+}
+
+.orange {
+  background-color: orange;
+  top: 0;
+  left: 0;
+}
+
+
+.card p {
+  margin: 5px 0;
+}
+
+.card-actions {
+  margin-top: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+  color: #333;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  color: #13a500; /* Sky Blue */
+}
+
+.delete-btn:hover {
+  color: #ff0000; /* Sky Blue */
+}
+
+.form-container {
+  max-width: 500px;
+  width: 100%;
+  
+}
+
+.form-container h2 {
+  margin-top: 20px;
+  margin-bottom: 2px;
+  color: black;
+  font-weight: 600;
+}
+
+.form-container h3 {
+  margin-top: 20px;
+  margin-bottom: 2px;
+  color: black;
+  font-weight: 600;
+}
+
+.form-container p {
+  font-size: 14px;
+}
+
+.form-container span {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.form-container button:hover {
+  background-color: black;
+}
+
+.sidebar-icon{
+  font-size: 22px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.sidebar-icon:hover{
+  color: #000000; 
+}
+
+.form-container {
+  background: #f4f7fc;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  margin: auto;
+  position: relative;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-header h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.profile-edit-btn {
+  background: #007bff;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.profile-edit-btn i {
+  margin-right: 5px;
+}
+
+.profile-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.profile-details {
+  width: 70%;
+}
+
+.profile-details p {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  color: #444;
+  margin: 10px 0;
+}
+
+.profile-side-elements {
+  width: 30%;
+  position: relative;
+}
+
+.shape-1, .shape-2, .shape-3 {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.shape-1 {
+  width: 170px;
+  height: 170px;
+  background-color: #ff5722;
+  top: 10px;
+  right: -10px;
+}
+
+.shape-2 {  
+  width: 60px;
+  height: 60px;
+  background-color: #ffea00;
+  top: 80px;
+  right: -20px;
+}
+
+.shape-3 {
+  width: 80px;
+  height: 80px;
+  background-color: #2196f3;
+  top: 150px;
+  right: 0;
+}
+
+/* .card-shape-1 {
+  width: 50px;
+  height: 50px;
+  background-color: #ff5722; 
+  top: 0;
+  right: -10px;
+} */
+
+/* .card-shape-2 {
+  width: 30px;
+  height: 30px;
+  background-color: #4caf50;
+  top: 40px;
+  right: 30px;
+} */
+
+/* .card-shape-3 {
+  width: 40px;
+  height: 40px;
+  background-color: #2196f3; 
+  top: 70px;
+  right: -15px;
+} */
+
+/* .side-elements {
+  position: relative;
+  height: 100px;
+  margin-top: 10px;
+}
+
+.card-shape-1, .card-shape-2, .card-shape-3 {
+  position: absolute;
+  border-radius: 50%;
+} */
+
+.insidecard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.track_btn{
+  background-color: #000000;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px;
+  border: none;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.track_btn:hover {
+  background-color: #007bff;
+  color: #000000;
+}
+
+#productForm {
+  width: 80%;
+  font-family: 'Poppins', sans-serif;
+  max-width: 500px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input[type="text"] {
+  width: 80%;
+  padding: 8px;
+  font-family: 'Poppins', sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  border-color: #007bff;
+}
+
+.add-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-btn:hover {
+  background-color: #000000;
+  color: #fff;
+}
+
+/* Table styling */
+.product-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 16px;
+}
+
+.product-table th, .product-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.product-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.product-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.product-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .product-table, #productForm {
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+}
+
+.edit-form input {
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid lightgray;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.edit-form label {
+  font-size: 18px;
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.edit-form {
+  margin-top: 15px;
+}
+
+.form-actions {
+  margin-top: 10px;
+}
+
+.form-actions button {
+  padding: 5px 10px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.form-actions button[type="button"] {
+  background-color: #ccc;
+  color: #333;
+}
+
+/* Dropdown container */
+.status-dropdown {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  /* border-bottom: 1px solid black; */
+  color: black;
+  font-size: 16px;
+  padding: 0px 12px;
+  cursor: pointer;
+  border-radius: 1px;
+  outline: none;
+  width: auto;
+}
+
+/* Dropdown options */
+.status-dropdown option {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  padding: 8px;
+}
+
+/* Style for dropdown arrow (optional, to hide the default arrow and create custom one) */
+.status-dropdown {
+  position: relative;
+  padding-right: 24px;
+}
+
+.status-dropdown:after {
+  
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: black;
+}
+
+/* Hover effect */
+.status-dropdown:hover {
+  border-color: #333;
+}
+
+/* Focus state */
+.status-dropdown:focus {
+  border-color: #555;
+}
+
+
+/* Grphs */
+
+.section {
+  padding: 20px;
+}
+
+.graph-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+.big-graph {
+  /* box-shadow: 0 4px 10px #000000; */
+  border-radius: 10px;
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+  width: 90%;
+}
+
+.small-graph {
+  /* box-shadow: 0 4px 10px #000000; */
+  border-radius: 10px;
+  width: 110%;
+}
+
+.graph img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
