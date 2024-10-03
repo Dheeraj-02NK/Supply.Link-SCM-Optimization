@@ -1,0 +1,331 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}
+    Admin Dashboard
+    {% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/admin-dashboard.css' %}" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <h1 class="navbar-logo">Supply<span>.Link</span></h1>
+    </div>
+    <div class="navbar-right">
+      <div class="search-container">
+        <i class="fas fa-search"></i>
+        <input type="search" placeholder="Search">
+      </div>
+      <div class="navbar-icons">
+        <i class="fas fa-bell icon"></i> <!-- Bell icon -->
+        <i class="fas fa-cog icon"></i> <!-- Settings icon -->
+        <div class="datetime">
+          <span id="current-date"></span>
+          <span id="current-time"></span>
+        </div>
+        <button class="track-btn" onclick="location.href='/track-order/'">Track</button>
+        <button class="logout-btn" onclick="location.href='/home'">Logout</button>
+
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="sidenavigation">
+      <aside class="sidebar">
+        {% block sidebar %}
+        <ul>
+          <h1>Welcome, {{ currentuser}}</h1>
+          <li id="home-tab" class="home" data-target="admin-home"><i class='bx bxs-home sidebar-icon'></i>Home</li>
+          <li id="users-tab" class="active" data-target="users"><i class='bx bxs-user sidebar-icon'></i>Users</li>
+          <li id="retailer-tab" data-target="retailer"><i class='bx bxs-store-alt sidebar-icon'></i>Retailer</li>
+          <li id="manufacturers-tab" data-target="manufacturers"><i
+              class='bx bxs-factory sidebar-icon'></i>Manufacturers</li>
+          <li id="distributors-tab" data-target="distributors"><i class='bx bxs-truck sidebar-icon'></i>Distributors
+          </li>
+          <li id="orders-tab" data-target="orders"><i class='bx bxs-package sidebar-icon'></i>Orders</li>
+          <!-- <li id="products-tab" data-target="products"><i class='bx bxs-box sidebar-icon'></i>Products</li> -->
+        </ul>
+        {% endblock %}
+      </aside>
+    </div>
+
+    <main class="main-content">
+
+      <section id="admin-home" class="section">
+        <h2>Home</h2>
+        <div class="graph-container">
+          <div class="graph big-graph">
+            <img src="{% static 'images/download 4.png' %}" alt="Small Graph 2">
+          </div>
+          <div class="graph small-graph">
+            <img src="{% static 'images/download 6.png' %}" alt="Small Graph 1">
+          </div>
+          <div class="graph small-graph">
+            <img src="{% static 'images/download 2.png' %}" alt="Big Graph">
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- Show all the users -->
+      <section id="users" class="section active">
+        <div class="user-data-section">
+          {% for user in userdata %}
+          <div class="card" id="user_{{user.uid}}">
+            <div class="user-info">
+              <p><strong>Full Name:</strong> {{user.fullname}}</p>
+              <p><strong>Username:</strong> {{user.username}}</p>
+              <p><strong>Phone Number:</strong> {{user.phone}}</p>
+              <p><strong>Company Name:</strong> {{user.company_name}}</p>
+              <p><strong>City:</strong> {{user.city}}</p>
+            </div>
+
+            <!-- Edit Form (hidden by default) -->
+            <div class="edit-form" style="display: none;">
+              <form id="editForm_{{user.uid}}">
+                <label for="fullname_{{user.uid}}"></label>
+                <input type="text" id="fullname_{{user.uid}}" name="fullname" value="{{user.fullname}}">
+
+                <label for="username_{{user.uid}}"></label>
+                <input type="text" id="username_{{user.uid}}" name="username" value="{{user.username}}">
+
+                <label for="phone_{{user.uid}}"></label>
+                <input type="text" id="phone_{{user.uid}}" name="phone" value="{{user.phone}}">
+
+                <label for="company_{{user.uid}}"></label>
+                <input type="text" id="company_{{user.uid}}" name="company_name" value="{{user.company_name}}">
+
+                <label for="city_{{user.uid}}"></label>
+                <input type="text" id="city_{{user.uid}}" name="city" value="{{user.city}}">
+
+                <div class="form-actions">
+                  <button type="submit">Submit</button>
+                  <button type="button" onclick="cancelEdit('{{user.uid}}')">Cancel</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="card-actions">
+              <button class="edit-btn" onclick="showEditForm('{{user.uid}}')">
+                <i class="fas fa-pencil-alt"></i>
+              </button>
+              <button class="delete-btn" onclick="deleteUser('{{user.uid}}')">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+
+            <!-- Circle Design -->
+            <div class="circle-design">
+              <div class="circle orange"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Show all the retailer -->
+      <section id="retailer" class="section">
+        <h2>Retailers</h2>
+        <div class="user-data-section">
+          {% for user in userdata %}
+          {% if user.role == 'retailer' %}
+          <div class="card" id="{{user.uid}}">
+            <p><strong>Full Name:</strong> {{user.fullname}}</p>
+            <p><strong>Username:</strong> {{user.username}}</p>
+            <p><strong>Phone Number:</strong> {{user.phone}}</p>
+            <p><strong>City:</strong> {{user.city}}</p>
+
+            <div class="card-actions">
+              <!-- <button class="edit-btn">
+                <i class="fas fa-pencil-alt"></i>
+              </button> -->
+              <button class="delete-btn" onclick="deleteUser('{{user.uid}}')">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+
+
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Show all the manufacturer -->
+      <section id="manufacturers" class="section">
+        <h2>Manufacturers</h2>
+        <div class="user-data-section">
+          {% for user in userdata %}
+          {% if user.role == 'manufacturer' %}
+          <div class="card" id="{{user.uid}}">
+            <p><strong>Full Name:</strong> {{user.fullname}}</p>
+            <p><strong>Username:</strong> {{user.username}}</p>
+            <p><strong>Phone Number:</strong> {{user.phone}}</p>
+            <p><strong>City:</strong> {{user.city}}</p>
+            <div class="card-actions">
+              <!-- <button class="edit-btn">
+                <i class="fas fa-pencil-alt"></i>
+              </button> -->
+              <button class="delete-btn" onclick="deleteUser('{{user.uid}}')">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Show all the distributor -->
+      <section id="distributors" class="section">
+        <h2>Distributors</h2>
+        <div class="user-data-section">
+          {% for user in userdata %}
+          {% if user.role == 'distributor' %}
+          <div class="card" id="{{user.uid}}">
+            <p><strong>Full Name:</strong> {{user.fullname}}</p>
+            <p><strong>Username:</strong> {{user.username}}</p>
+            <p><strong>Phone Number:</strong> {{user.phone}}</p>
+            <p><strong>City:</strong> {{user.city}}</p>
+            <div class="card-actions">
+              <!-- <button class="edit-btn">
+                <i class="fas fa-pencil-alt"></i>
+              </button> -->
+              <button class="delete-btn" onclick="deleteUser('{{user.uid}}')">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Don't touch, this will affect main content in all the pages -->
+      {% block main-content %}
+
+      {% endblock %}
+      <!-- Don't touch, this will affect main content in all the pages -->
+
+      <!-- Show all the orders -->
+      <section id="orders" class="section">
+        <h2>Orders</h2>
+        <div class="user-data-section">
+          <!-- Loop over the orders -->
+          <!-- Loop over the orders -->
+          {% for ord in orders %}
+          <div class="card">
+            <!-- <p><strong>Order ID:</strong> {{ ord.order_id }}</p> -->
+            <p><strong>Dropoff:</strong> {{ ord.dropoff_point }}</p>
+
+            <!-- Access the company_name using the foreign key relationships -->
+            <p><strong>Distributor (Logistics):</strong> {{ ord.logistics.company_name }}</p>
+            <p><strong>Manufacturer:</strong> {{ ord.manufacturer.company_name }}</p>
+            <p><strong>Retailer:</strong> {{ ord.retailer.company_name }}</p>
+            <p><strong>Quantity:</strong> {{ ord.quantity }}</p>
+            <p><strong>Status:</strong> {{ ord.status }}</p>
+          </div>
+          {% endfor %}
+        </div>
+
+
+        <!-- More order cards can be added similarly -->
+      </section>
+
+      <section id="products" class="section">
+        <h2>Products</h2>
+        <!-- Placeholder for products -->
+      </section>
+    </main>
+  </div>
+  {% block body %}
+
+  {% endblock %}
+  <script>
+    function updateDateTime() {
+      const dateElement = document.getElementById("current-date");
+      const timeElement = document.getElementById("current-time");
+
+      const now = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const dateString = now.toLocaleDateString('en-IN', options);
+      const timeString = now.toLocaleTimeString('en-IN');
+
+      dateElement.textContent = dateString;
+      timeElement.textContent = timeString;
+    }
+
+    setInterval(updateDateTime, 1000); // Update every second
+    updateDateTime(); // Initial call to set date and time immediately
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuItems = document.querySelectorAll(".sidebar li");
+      const sections = document.querySelectorAll(".main-content .section");
+
+      menuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          // Remove 'active' class from all sections and menu items
+          sections.forEach((section) => section.classList.remove("active"));
+          menuItems.forEach((menu) => menu.classList.remove("active"));
+
+          // Add 'active' class to the clicked menu item and corresponding section
+          item.classList.add("active");
+          const targetSection = document.getElementById(
+            item.getAttribute("data-target")
+          );
+          targetSection.classList.add("active");
+        });
+      });
+    });
+
+    function deleteUser(uid) {
+      if (confirm("Are you sure you want to delete this user?")) {
+        // If the user confirms deletion, execute the delete logic
+        $.ajax({
+          type: "POST",
+          url: "/delete_user/",
+          data: { uid: uid },
+          success: function (data) {
+            if (data) {
+              // Redirect to the view staff page on successful deletion
+              window.location.replace("/view_staff");
+            }
+          },
+        });
+        console.log("User with ID " + uid + " deleted.");
+      } else {
+        console.log("User deletion canceled.");
+      }
+    }
+
+    function showEditForm(userId) {
+      var userInfo = document.querySelector(`#user_${userId} .user-info`);
+      var editForm = document.querySelector(`#user_${userId} .edit-form`);
+      userInfo.style.display = 'none';
+      editForm.style.display = 'block';
+    }
+
+    // Function to cancel editing and hide the form
+    function cancelEdit(userId) {
+      var userInfo = document.querySelector(`#user_${userId} .user-info`);
+      var editForm = document.querySelector(`#user_${userId} .edit-form`);
+      editForm.style.display = 'none';
+      userInfo.style.display = 'block';
+    }
+
+
+  </script>
+</body>
+
+</html>

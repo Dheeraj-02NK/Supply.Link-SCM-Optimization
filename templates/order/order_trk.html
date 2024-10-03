@@ -1,0 +1,331 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Track Order</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #007BFF; /* Skyblue */
+            padding: 15px 20px;
+            color: white;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar-logo {
+            font-size: 24px;
+            color: white;
+        }
+
+        /* Main Content Container */
+        .main-content {
+            flex: 1;
+        }
+
+        /* Order Form Container */
+        .order-form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        /* Order Form */
+        .order-form {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .order-form h2 {
+            margin: 0 0 20px;
+            margin-top: 10px;
+        }
+        .order-form input[type="text"] {
+            padding: 10px;
+            width: calc(100% - 22px); /* Adjust for padding and border */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+        .order-details{
+            margin-top: 100px;
+            text-transform: capitalize;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #ffffff;
+            width: 100%;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .order-details span{
+            font-weight: 700;
+        }
+        .order-form button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+        }
+        .order-form button:hover {
+            background-color: #000000;
+        }
+
+        /* Loader */
+        .order-loading-screen {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Order Tracking Content */
+        .order-tracking-content {
+            display: none;
+            text-align: center;
+            justify-content: center;
+            padding: 40px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Horizontal tracking line */
+        .tracking-line {
+            position: relative;
+            text-transform: capitalize;
+            width: 80%;
+            height: 4px;
+            background-color: #ccc;
+            margin: 40px auto;
+            border-radius: 2px;
+        }
+
+        /* Dots */
+        .stage-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            border: 3px solid #ccc;
+            top: -10px;
+        }
+        .stage-active {
+            background-color: #4caf50;
+            border-color: #4caf50;
+        }
+
+        /* Truck */
+        .truck-gif {
+            position: absolute;
+            top: -50px;
+            width: 100px;
+            transition: right 0.5s ease;
+            z-index: 3;
+        }
+
+        /* Stage Labels */
+        .stage-label {
+            position: absolute;
+            top: 30px;
+            font-weight: bold;
+            text-align: center;
+            width: 80px;
+        }
+
+        /* Define positions for each stage */
+        .stage-1 { right: 0%; } /* Pending */
+        .stage-2 { right: 33%; } /* Dispatched */
+        .stage-3 { right: 66%; } /* On Move */
+        .stage-4 { right: 100%; transform: translateX(100%); } /* Delivered */
+
+        /* Footer */
+        .footer {
+            background-color: black;
+            color: white;
+            text-align: left;
+            font-size: 14px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            
+        }
+        .footer .footer-links {
+            margin: 10px 0;
+        }
+        .footer .footer-columns {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .footer .footer-column {
+            flex: 1;
+            margin-top: 10px;
+            min-width: 200px;
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#" class="navbar-logo">Supply.Link</a>
+        <a href="#">Home</a>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="main-content">
+        <!-- Order Form Container -->
+        <div class="order-form-container">
+            <form method="POST" class="order-form">
+                {% csrf_token %}
+                <h2>Enter Order ID to Track</h2>
+                <input type="text" name="order_id" placeholder="Order ID" required>
+                <button type="submit">Track Order</button>
+            </form>
+        </div>
+
+        <!-- Loading Screen with Truck GIF -->
+        <div class="order-loading-screen" id="loading-screen">
+            <img src="{% static 'images/ord_load.gif' %}" alt="Loading...">
+        </div>
+
+        <!-- Order Tracking Content -->
+        {% if order %}
+        <div class="order-tracking-content" id="order-tracking">
+            <h1>Tracking for Order ID: {{ order.order_id }}</h1>
+
+            <div class="tracking-line">
+                <!-- Truck -->
+                <img src="{% static 'images/tacktruck.gif' %}" class="truck-gif" id="truck" alt="Truck">
+
+                <!-- Stage Dots -->
+                <div class="stage-dot stage-1 {% if order.status == 'pending' %}stage-active{% endif %}"></div>
+                <div class="stage-dot stage-2 {% if order.status == 'dispatched' %}stage-active{% endif %}"></div>
+                <div class="stage-dot stage-3 {% if order.status == 'on move' %}stage-active{% endif %}"></div>
+                <div class="stage-dot stage-4 {% if order.status == 'delivered' %}stage-active{% endif %}"></div>
+
+                <!-- Labels -->
+                <div class="stage-label stage-1">Pending</div>
+                <div class="stage-label stage-2">Dispatched</div>
+                <div class="stage-label stage-3">On Move</div>
+                <div class="stage-label stage-4">Delivered</div>
+            </div>
+
+            <!-- Order Details -->
+            <div class="order-details">
+                <h2>Order Summary</h2>
+                <p><span>Status</span> <br>{{ order.status }}</p>
+                <p><span>Dispatched By</span> <br>{{ order.manufacturer.company_name }}</p>
+                <p><span>To be Delivered</span> <br>{{ order.retailer.company_name }}</p>
+                <p><span>Delivered By</span> <br>{{ order.logistics.company_name }}</p>
+                <p><span>Drop-off Point</span> <br>{{ order.dropoff_point }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h2>Supply.Link</h2>
+                <a href="">Express Parcel</a><br>
+                <a href="">Warehousing</a><br>
+                <a href="">Full Truck Load</a><br>
+                <a href="">AI Dashboard</a><br>
+                <a href="">Real-Time Tracking</a>
+            </div>
+            <div class="footer-column">
+                <h2>Solutions</h2>
+                <a href="">Advanced Analytics</a><br>
+                <a href="">Sustainability</a><br>
+                <a href="">Customizable Solutions</a><br>
+                <a href="">ML Optimization</a><br>
+                <a href="">Integrated Logistics</a>
+            </div>
+            <div class="footer-column">
+                <h2>Contact</h2>
+                <p><a href="mailto:info@supplylink.com">info@supplylink.com</a></p>
+                <p>080-1234-555-666</p>
+                <p><a href="">LinkedIn</a></p>
+                <p><a href="">Pinterest</a></p>
+                <p><a href="">Facebook</a></p>
+            </div>
+            <div class="footer-column">
+                <h2>Company</h2>
+                <a href="">About Us</a><br>
+                <a href="">Careers</a><br>
+                <a href="">Privacy Policy</a><br>
+                <a href="">Terms & Conditions</a><br>
+                <a href="">FAQs</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Handle the visibility of order tracking content and loader
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const trackingContent = document.getElementById('order-tracking');
+
+            if (trackingContent) {
+                loadingScreen.style.display = 'none'; // Hide loader immediately
+                trackingContent.style.display = 'block';
+                
+                // Move truck based on status
+                const orderStatus = "{{ order.status }}";
+                const truck = document.getElementById('truck');
+                let truckPosition = -1;
+
+                if (orderStatus === 'dispatched') {
+                    truckPosition = 31;
+                } else if (orderStatus === 'on move') {
+                    truckPosition = 65;
+                } else if (orderStatus === 'delivered') {
+                    truckPosition = 93;
+                }
+
+                truck.style.right = truckPosition + '%';
+            }
+        });
+    </script>
+</body>
+</html>

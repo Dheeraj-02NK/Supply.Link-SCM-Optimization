@@ -1,0 +1,122 @@
+{% extends 'authuser/admin-dashboard.html' %}
+{% load static %}
+{% block title %}Retailer Dashboard{% endblock %}
+
+{% block sidebar %}
+<ul>
+  <ul>
+    <h2>Welcome back</h2>
+    <li id="home-tab" class="home" data-target="home">Home</li>
+    <li id="current-orders-tab" data-target="orders-tab">Orders</li>
+    <!-- <li id="history-tab" data-target="hist-tab">History</li> -->
+    <!-- <li id="placeord-tab" data-target="placeord-tab">Place Orders</li> -->
+    <li id="analytics-tab" data-target="analytics">Analytics</li>
+    <!-- <li id="products-tab" data-target="products">Profile</li> -->
+    <!-- <li id="shipping-tab" data-target="shipping">Profile</li> -->
+    <li id="retailer-info-tab" class="active" data-target="retailer-id">Profile</li>
+  </ul>
+  {% endblock %}
+
+  {% block content %}
+
+  {% endblock %}
+
+  {% block main-content %}
+
+  <section id="home" class="section">
+    <h2>Home</h2>
+        <div class="graph-container">
+          <div class="graph big-graph">
+            <img src="{% static 'images/download 3.png' %}" alt="Small Graph 2">
+          </div>
+          <div class="graph small-graph">
+            <img src="{% static 'images/download 2.png' %}" alt="Small Graph 1">
+          </div>
+          <div class="graph small-graph">
+            <img src="{% static 'images/download 7.png' %}" alt="Big Graph">
+          </div>
+        </div>
+  </section>
+
+  <section id="orders-tab" class="section">
+    <h2>Orders</h2>
+    <div class="user-data-section">
+      {% for order in orders %}
+      <div class="card">
+        <p><strong>Order ID:</strong> {{ order.order_id }}</p> <!-- Assuming order has dropoff_location field -->
+        <p><strong>Dropoff:</strong> {{ order.dropoff_point }}</p> <!-- Assuming order has dropoff_location field -->
+        <p><strong>Logistics:</strong> {{ order.logistics.company_name }}</p>
+        <p><strong>Manufacturer:</strong> {{ order.manufacturer.company_name }}</p>
+        <!-- <p><strong>Retailer:</strong> {{ order.retailer.company_name }}</p> -->
+        <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+        <p><strong>Status:</strong> {{ order.status }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="hist-tab" class="section">
+    <h2>History</h2>
+    <!-- History content -->
+  </section>
+
+  <section id="analytics" class="section">
+    <h2>Analytics</h2>
+    <!-- Analytics content -->
+  </section>
+
+
+  <!-- Main content where profile info is displayed -->
+  <section id="retailer-id" class="section active">
+    <h2>Profile</h2>
+    <div class="form-container">
+      <div class="profile-header">
+        <h2>Hi, {{currentuser}}</h2>
+        <button class="profile-edit-btn"><i class="fas fa-pencil-alt"></i> Edit</button>
+      </div>
+      <div class="profile-content">
+        <div class="profile-details">
+          <p><strong>Email:</strong> {{userdata4.username}}</p>
+          <p><strong>Phone Number:</strong> +91 {{userdata4.phone}}</p>
+          <p><strong>GST ID:</strong> {{userdata4.gstid}}</p>
+          <p><strong>Organization Name:</strong>{{userdata4.company_name}}</p>
+          <p><strong>City:</strong> {{userdata4.city}}</p>
+          <p><strong>Pincode:</strong> {{userdata4.pincode}}</p>
+        </div>
+        <div class="profile-side-elements">
+          <!-- Random shaped color elements -->
+          <div class="shape-1"></div>
+          <div class="shape-2"></div>
+          <div class="shape-3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock %}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('ul li');
+      const sections = document.querySelectorAll('.section');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.getAttribute('data-target');
+
+          // Remove 'active' class from all tabs
+          tabs.forEach(t => t.classList.remove('active'));
+          // Add 'active' class to the clicked tab
+          tab.classList.add('active');
+
+          // Hide all sections
+          sections.forEach(section => section.classList.remove('active'));
+          // Show the section corresponding to the clicked tab
+          document.getElementById(target).classList.add('active');
+        });
+      });
+    });
+
+    
+
+  </script>

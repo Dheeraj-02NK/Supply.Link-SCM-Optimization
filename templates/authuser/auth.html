@@ -1,0 +1,310 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supply.link - Login/Signup</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Jquery import -->
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="logo">
+      <h1>Supply<span>.Link</span></h1>
+    </div>
+    <div class="nav-links">
+      <a href="">Home</a>
+      <a href="">About</a>
+      <a href="">Support</a>
+      <a href="">FAQ</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="left-side" id="left-side">
+      <img src="{% static 'images/auth.png' %}" alt="Supply Chain Image" id="image" />
+    </div>
+    <div class="right-side" id="right-side">
+      <div class="form-container" id="login-form">
+        <h2>Login</h2>
+        <p>
+          Don't have an account?
+          <span class="toggle-link" onclick="toggleForm()">Sign up</span>
+        </p>
+        <input type="text" placeholder="Username"  id="username" name="username" />
+        <input type="password" placeholder="Password" id="passw" name="passw" required />
+        <button onclick="dash()" type="submit">Login</button>
+      </div>
+      <div class="form-container" id="signup-form" style="display: none">
+        <h2>Sign Up</h2>
+        <p>
+          Already have an account?
+          <span class="toggle-link" onclick="toggleForm()">Login</span>
+        </p>
+       <div class="input-flex">
+        <input type="text" placeholder="Full Name" id="fullname" name="fullname" required />
+        <input type="email" placeholder="Email" id="email" name="email" required />
+        <input type="text" placeholder="Phone Number" id="phone" name="phone" required />
+        <input type="password" placeholder="Password" id="password" name="password" required />
+       </div>
+
+        <div class="gst-business-container">
+          <input type="text" placeholder="GST ID" id="gstin" class="gistin" name="gstin" required />
+          <select id="role" name="role" class="role" required>
+            <option value="" disabled selected>Select Business Type</option>
+            <option value="manufacturer" id="manufacturing">Production and Manufacturing</option>
+            <option value="distributor" id="distribution">Logistics and Distribution</option>
+            <option value="retailer" id="retailer">Wholesale and Retail</option>
+          </select>
+        </div>
+
+        <div class="input-flex">
+        <input type="text" placeholder="Organization Name" id="organization" name="organization" required />
+        <input type="text" placeholder="City" id="city" name="city" required />
+        <input type="text" placeholder="Pincode" id="pincode" name="pincode" required />
+        </div>
+
+        <button onclick="check()" type="submit">Signup</button>
+      </div>
+      
+    </div>
+  </div>
+
+  <section class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-question">What is Supply Chain Management?</div>
+      <div class="faq-answer">
+        <p>
+          Supply Chain Management (SCM) involves overseeing and managing the
+          entire flow of goods and services from raw materials to the final
+          customer. It includes activities such as procurement, production,
+          logistics, and distribution to ensure that products are delivered
+          efficiently and effectively.
+        </p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">How does SCM improve efficiency?</div>
+      <div class="faq-answer">
+        <p>
+          SCM improves efficiency by optimizing processes, reducing costs, and
+          ensuring timely delivery of products. By integrating and
+          coordinating various supply chain activities, companies can minimize
+          delays, avoid overstocking or stockouts, and improve overall
+          operational performance.
+        </p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What role does logistics play in SCM?</div>
+      <div class="faq-answer">
+        <p>
+          Logistics is a crucial component of SCM, focusing on the planning,
+          implementation, and control of the movement and storage of goods.
+          Effective logistics management ensures that products are transported
+          efficiently, reducing costs and improving delivery times.
+        </p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        How can Machine Learning (ML) enhance SCM?
+      </div>
+      <div class="faq-answer">
+        <p>
+          Machine Learning enhances SCM by providing predictive analytics,
+          optimizing inventory management, and improving demand forecasting.
+          ML algorithms can analyze vast amounts of data to identify patterns,
+          forecast trends, and make data-driven decisions, leading to more
+          efficient and responsive supply chains.
+        </p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        What are the benefits of ML in supply chain optimization?
+      </div>
+      <div class="faq-answer">
+        <p>
+          ML offers several benefits for supply chain optimization, including
+          improved accuracy in demand forecasting, better inventory
+          management, enhanced route optimization, and proactive maintenance.
+          These benefits result in cost savings, increased efficiency, and a
+          more agile supply chain.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Supply<span>.Link</span></h3>
+      </div>
+      <div class="footer-column">
+        <h3>Services</h3>
+        <ul>
+          <li>Express Parcel</li>
+          <li>Warehousing</li>
+          <li>Full Truck Load</li>
+          <li>AI Dashboard</li>
+          <li>Real-Time Tracking</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Solutions</h3>
+        <ul>
+          <li>Advanced Analytics</li>
+          <li>Sustainability</li>
+          <li>Customizable Solutions</li>
+          <li>ML Optimization</li>
+          <li>Integrated Logistics</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contacts</h3>
+        <ul>
+          <li>
+            Email:
+            <a href="mailto:info@supplylink.com">info@supplylink.com</a>
+          </li>
+          <li>Phone: 080-1234-555-666</li>
+          <li>
+            LinkedIn:
+            <a href="https://www.linkedin.com/company/supply-link" target="_blank">Supply.Link</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="line">
+      <div class="separator-lines"></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-links">
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Company</a>
+        <a href="#">Issue</a>
+        <a href="#">Contact</a>
+      </div>
+      <p>&copy; 2024 Supply.Link. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleForm() {
+      const leftSide = document.getElementById("left-side");
+      const rightSide = document.getElementById("right-side");
+      const loginForm = document.getElementById("login-form");
+      const signupForm = document.getElementById("signup-form");
+
+      if (loginForm.style.display === "none") {
+        signupForm.style.display = "none";
+        loginForm.style.display = "block";
+        leftSide.style.order = 0;
+        rightSide.style.order = 1;
+      } else {
+        loginForm.style.display = "none";
+        signupForm.style.display = "block";
+        leftSide.style.order = 1;
+        rightSide.style.order = 0;
+      }
+    }
+
+    document.querySelectorAll(".faq-question").forEach((question) => {
+      question.addEventListener("click", () => {
+        const answer = question.nextElementSibling;
+        const isVisible = answer.style.display === "block";
+
+        // Hide all answers
+        document
+          .querySelectorAll(".faq-answer")
+          .forEach((a) => (a.style.display = "none"));
+
+        // Show the clicked answer if it was not already visible
+        answer.style.display = isVisible ? "none" : "block";
+      });
+    });
+
+    function dash() {
+      var username = $('#username').val();
+      var passw = $('#passw').val();
+      console.log(username)
+      console.log(passw)
+      
+      $.ajax({
+        type:"POST",
+        url:"{% url 'login_check' %}",
+        data:{"username":username, "passw":passw},
+        success: function(data){
+          if (data["status"] === "pass"){
+            alert("Success");
+            if(data["role"] === 'admin'){
+              window.location.href = '/view_staff'
+            }
+            else if(data["role"] === 'manufacturer'){
+              window.location.href = '/manufacturer'
+            }
+           else if(data["role"] === 'distributor'){
+              window.location.href = '/distributor'
+            }
+            else if(data["role"] === 'retailer'){
+              window.location.href = '/retailer'
+            }
+            else {
+              alert("Failed")
+            }
+          
+          }
+        },
+        error: function(xhr, status, error) {
+          console.log(xhr); // Log the full XHR object
+          console.log(status); // Log the status (e.g., "error", "timeout")
+          console.log(error); // Log the error (e.g., error message)
+          alert('Invalid Credentials'); // Alert with a more detailed error message
+        }
+      })
+    }
+
+    function check() {
+      let fullname = $("#fullname").val();
+      let email = $("#email").val();
+      let phone = $("#phone").val();
+      let password = $("#password").val();
+      let gstin = $("#gstin").val();
+      let role = $("#role").val();
+      let organization = $("#organization").val();
+      let city = $("#city").val();
+      let pincode = $("#pincode").val();
+      console.log(fullname, email, phone, password, gstin, role, organization, city, pincode)
+      $.ajax({
+        type: "POST",
+        url: "/create_user/",
+        data: {
+          fullname: fullname,
+          email: email,
+          phone: phone,
+          password: password,
+          gstin: gstin,
+          role: role,
+          organization: organization,
+          city: city,
+          pincode: pincode
+        },
+        
+        success: function (data) {
+          if (data["status"] === "pass") {
+            toggleForm();
+          }
+        },
+      });
+    }
+  </script>
+</body>
+
+</html>

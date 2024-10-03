@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupplyLink | Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Supply<span>.Link</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#solutions">Solutions</a></li>
+            <li><a onclick="location.href='/track-order/'">Track Order</a></li>
+            <!-- <button class="track-btn" onclick="location.href='/track-order/'">Track</button> -->
+            <li><a href="#login" class="btn-login" onclick="login()">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-heading">Transforming Supply Chains with Innovation</h1>
+            <p class="hero-subheading">SupplyLink leverages advanced technology and expertise to optimize every aspect
+                of your supply chain, driving efficiency and growth.</p>
+            <a href="#services" class="btn-get-started">Get Started</a>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'images/supply.jpg' %}" alt="Supply Chain Image">
+        </div>
+    </section>
+
+    <div class="line">
+        <div class="separator-lines" ></div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-image">
+            <img src="{% static 'images/about.jpg' %}" alt="About Supply Chain">
+        </div>
+        <div class="about-text">
+            <h2>About Supply.Link</h2>
+            <p>SupplyLink is a leading provider of innovative supply chain solutions, offering a comprehensive suite of
+                services designed to meet the needs of modern businesses. With a commitment to excellence, we help our
+                clients achieve seamless operations, from logistics and warehousing to real-time tracking and AI-driven
+                analytics. Our goal is to empower companies to optimize their supply chain, reduce costs, and enhance
+                customer satisfaction.</p>
+            <p>By combining industry expertise with cutting-edge technology, SupplyLink delivers customized solutions
+                that are scalable, efficient, and tailored to the unique challenges of your business.</p>
+        </div>
+    </section>
+
+    <div class="line">
+        <div class="separator-lines" ></div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services" class="services supply-services">
+        <h2>Our Services</h2>
+        <div class="services-cards">
+            <div class="card">
+                <i class='bx bxs-package service-icon'></i>
+                <h3>Express Parcel</h3>
+                <p>Fast and reliable parcel delivery services tailored to your needs.</p>
+            </div>
+            <div class="card">
+                <i class='bx bxs-buildings service-icon'></i>
+                <h3>Warehousing</h3>
+                <p>Secure and efficient storage solutions for all your goods.</p>
+            </div>
+            <div class="card">
+                <i class='bx bxs-truck service-icon' ></i>
+                <h3>Full Truck Load</h3>
+                <p>Cost-effective full truckload shipping for larger consignments.</p>
+            </div>
+            <div class="card">
+                <i class='bx bx-bar-chart service-icon'></i>
+                <h3>AI Dashboard</h3>
+                <p>Real-time insights and analytics for smarter supply chain decisions.</p>
+            </div>
+            <div class="card">
+                <i class='bx bxs-map service-icon'></i>
+                <h3>Real-Time Tracking</h3>
+                <p>Monitor your shipments with real-time tracking and updates.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="line">
+        <div class="separator-lines" ></div>
+    </div>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="solutions">
+        <h2>Our Solutions</h2>
+        <div class="solutions-cards">
+            <div class="card">
+                <i class='bx bx-broadcast solution-icon'></i>
+                <h3>Integrated Logistics</h3>
+                <p>Seamless coordination across all supply chain activities, ensuring efficiency and cost-effectiveness.
+                </p>
+            </div>
+            <div class="card">
+                <i class='bx bxs-cart-alt solution-icon'></i>
+                <h3>ML Optimization</h3>
+                <p>Use cutting-edge ML technologies for supply chain Optimization, demanding forecasting.
+                </p>
+            </div>
+            <div class="card">
+                <i class='bx bxs-cog solution-icon' ></i>
+                <h3>Customizable Solutions</h3>
+                <p>Tailor-made solutions to fit your unique supply chain needs and challenges.</p>
+            </div>
+            <div class="card">
+                <i class='bx bx-world solution-icon'></i>
+                <h3>Sustainability</h3>
+                <p>Eco-friendly logistics solutions to minimize your environmental impact.</p>
+            </div>
+            <div class="card">
+                <i class='bx bx-candles solution-icon'></i>
+                <h3>Advanced Analytics</h3>
+                <p>Leverage data-driven insights for better decision-making.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Column 1: Logo -->
+            <div class="footer-column">
+                <h3 class="footer-logo">Supply<span>.Link</span></h3>
+            </div>
+    
+            <!-- Column 2: Services -->
+            <div class="footer-column">
+                <h4>Services ></h4>
+                <ul>
+                    <li>Express Parcel</li>
+                    <li>Warehousing</li>
+                    <li>Full Truck Load</li>
+                    <li>AI Dashboard</li>
+                    <li>Real-Time Tracking</li>
+                </ul>
+            </div>
+    
+            <!-- Column 3: Solutions -->
+            <div class="footer-column">
+                <h4>Solutions ></h4>
+                <ul>
+                    <li>Advanced Analytics</li>
+                    <li>Sustainability</li>
+                    <li>Customizable Solutions</li>
+                    <li>ML Optimization</li>
+                    <li>Integrated Logistics</li>
+                </ul>
+            </div>
+    
+            <!-- Column 4: Contact Information -->
+            <div class="footer-column">
+                <h4>Contact ></h4>
+                <ul>
+                    <li><i class='bx bx-envelope'></i> info@supplylink.com</li>
+                    <li><i class='bx bx-phone'></i> 080-1234-555-666</li>
+                    <li><i class='bx bxl-linkedin'></i> Supply.Link - LinkedIn</li>
+                    <li><i class='bx bxl-pinterest'></i> Supply.Link - Pinterest</li>
+                    <li><i class='bx bxl-facebook'></i> Supply.Link - Facebook</li>
+                </ul>
+                
+            </div>
+            <div class="separator-line"></div>
+        </div>
+
+        <!-- Below the columns: Terms, Company, Issue, Contact -->
+        <div class="footer-links">
+            <a>Terms & Conditions</a>
+            <a>Company</a>
+            <a>Issue</a>
+            <a>Contact</a>
+            <!-- Copyright -->
+        <p>&copy; 2024 SupplyLink | All rights reserved.</p>
+        </div>
+    </footer>
+    
+
+</body>
+<script>
+    function login(){
+        window.location.href = 'signup/'
+    }
+</script>
+
+</html>
