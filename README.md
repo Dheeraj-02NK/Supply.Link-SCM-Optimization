@@ -6,4 +6,4 @@ How to run:
 1. scmvenv\Scripts\activate
 2. dir
 3. cd SupplyChainManagement
-4. python manage.py runserver <port number>
+4. python manage.py runserver [port number]
